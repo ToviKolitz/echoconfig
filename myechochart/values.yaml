@@ -1,0 +1,33 @@
+deployment:
+  replicaCount: 2
+  lable: app-echo
+  image: gcr.io/k8s-my-firs-project/echo:2.0
+  appPort: 3000
+  mongourlkey: MONGODBURL
+service:
+  serviceName: echo-service
+  type: ClusterIP
+  port: 3000
+ingress:
+  path: "/"
+  pathType: Prefix
+  host: tovaecho1.tk
+  secretName: chart-example-tls
+configMap:
+  configMapName: conf-app-echo
+  port: "3000"
+  loglevel: "info"
+  persist: "true"
+  dbname: "echo"
+  #mongodburl: "mongodb://tova:123456@mongo-echo-mongodb-0.mongo-echo-mongodb-headless:27017,mongo-echo-mongodb-1.mongo-echo-mongodb-headless:27017/echo"
+issuer:
+  issuerName: letsencrypt-prod2
+secret:
+  mongodburl: bW9uZ29kYjovL3RvdmE6MTIzNDU2QG1vbmdvLWVjaG8tbW9uZ29kYi0wLm1vbmdvLWVjaG8tbW9uZ29kYi1oZWFkbGVzczoyNzAxNyxtb25nby1lY2hvLW1vbmdvZGItMS5tb25nby1lY2hvLW1vbmdvZGItaGVhZGxlc3M6MjcwMTcvZWNobw==
+  dbname: ZWNobw==
+  collectionName: ZWNob3M=
+  host: bW9uZ28tZWNoby1tb25nb2RiLWhlYWRsZXNz
+  port: MjcwMTc=
+  user: dG92YQ==
+  password: MTIzNDU2
+  secretName: echo-app-secret

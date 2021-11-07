@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.deployment.lable }}
+spec:
+  replicas: {{ .Values.deployment.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.deployment.lable }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.deployment.lable }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: {{ .Values.deployment.image  }}
+          envFrom:
+          - configMapRef:
+              name: {{ .Values.configMap.configMapName }}
+          env:
+          - name: MONGODBURL
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.secret.secretName }}
+                key: {{ .Values.deployment.mongourlkey }}
+          ports:
+            - containerPort: {{ .Values.deployment.appPort }}

@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.configMap.configMapName }}
+data:
+  PORT: "{{ .Values.configMap.port }}"
+  LOGLEVEL: "{{ .Values.configMap.loglevel }}"
+  PERSIST: "{{ .Values.configMap.persist }}"
+  DBNAME: "{{ .Values.configMap.dbname }}"
+  #MONGODBURL: "{{ .Values.configMap.mongodburl }}"
